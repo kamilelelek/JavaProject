@@ -1,12 +1,14 @@
 package lesson4;
 
 
+import java.util.Objects;
+
 public class Person {
 
     // SOLID i KISS
-    private String name;
+    private  String name;
     private String surename;
-    private int age;
+    private  int age;
 
     public Person() {
     }
@@ -40,6 +42,9 @@ public class Person {
     public void setAge(int age) {
         this.age = age;
     }
+    public int hashCode() {
+        return Objects.hash(name, surename, age);
+    }
 
     @Override
     public String toString() {
@@ -49,4 +54,10 @@ public class Person {
                 ", age=" + age +
                 '}';
     }
+    public boolean equals(Object o){
+        if (this == o){return true;}
+        if (!(o instanceof Person)){return false;}
+        return  age == Person.this.age && Objects.equals(name, Person.this.name) && Objects.equals(surename, Person.this.surename);
+    }
+
 }

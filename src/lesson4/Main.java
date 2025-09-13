@@ -20,8 +20,8 @@ Najstarsza osobe na liscie
 
      */
 
-    static void main(String[] args) {
-        List<String> stringList = new ArrayList<>();
+   public static void main(String[] args) {
+        /*List<String> stringList = new ArrayList<>();
         ArrayList<String> stringList2 = new ArrayList<>();
 
         Set<String> stringSet = new HashSet<>();
@@ -41,22 +41,26 @@ Najstarsza osobe na liscie
         stringMap.put(1 , "Java22");
 
         System.out.println(stringMap);
-
+        */
         Person ola = new Person();
         ola.setName("Aleksandra");
         Person mateusz = new Person("Mateusz", "Glanowski", 34);
         Person kamil = new Person("Kamil", "Lelek", 30);
 
-        System.out.println(kamil.getAge());
+        //System.out.println(kamil.getAge());
 
-        System.out.println(ola);
-        List<Person> list = new ArrayList<>();
+        //System.out.println(ola);
+        ArrayList<Person> list = new ArrayList<>();
         list.add(mateusz);
         list.add(kamil);
         list.add(ola);
+        int uniquePeople = receivPeople(list);
+        System.out.println("liczba unikalnych osób na liście: "+uniquePeople);
+
     }
 
-    private int receivPeople(ArrayList<Person> list) {
-
+    public static int receivPeople(ArrayList<Person> list) {
+        Set<Person> persons= new HashSet<>(list);
+        return persons.size();
     }
 }

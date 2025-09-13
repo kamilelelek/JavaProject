@@ -3,9 +3,8 @@ package homework;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
-public class anagrams {
+public class Anagrams {
     static void main(String[] args) {
         String slowo = "Kamil";
         List<String> lista = List.of("limak", "kon", "mlot", "mercedes", "Mikal", "kLaMi");
