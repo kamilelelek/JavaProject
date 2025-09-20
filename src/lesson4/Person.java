@@ -6,9 +6,12 @@ import java.util.Objects;
 public class Person {
 
     // SOLID i KISS
-    private  String name;
+    // Kontrakt hashcode & equals
+    //nauczyc sie gettery settery i constructory (bezparametrowe
+
+    private String name;
     private String surename;
-    private  int age;
+    private int age;
 
     public Person() {
     }
@@ -42,6 +45,15 @@ public class Person {
     public void setAge(int age) {
         this.age = age;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age && Objects.equals(name, person.name) && Objects.equals(surename, person.surename);
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(name, surename, age);
     }
@@ -53,11 +65,6 @@ public class Person {
                 ", surename='" + surename + '\'' +
                 ", age=" + age +
                 '}';
-    }
-    public boolean equals(Object o){
-        if (this == o){return true;}
-        if (!(o instanceof Person)){return false;}
-        return  age == Person.this.age && Objects.equals(name, Person.this.name) && Objects.equals(surename, Person.this.surename);
     }
 
 }
