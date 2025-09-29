@@ -1,6 +1,6 @@
 package homework;
 
-public class zadanie2 {
+public class Homework2 {
        /*
     dla wszystkich liczb 4ro cyfrowych wypisz te których suma cyfr dziesiątek i jedności jest równa sumie cyfr setek i tysięcy
     */
