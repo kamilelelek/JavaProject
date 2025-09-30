@@ -1,14 +1,35 @@
-package lesson5;
+Notatki z lekcji
+# 29.09.2025
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+## Do przeczytania po lekcji
+- Marge / Rebase - Git
+- Jak działa Git - jakie są etapy życia zmian w Git
+- Do wyjaśnienia
 
-public class ProductService {
+```
+public List<Product> getProductsFromJSON(List<Product> products) throws IOException {
+        // wczytanie JSON z resources
+        String json = MyJsonReader.readFileAsStringFromResources("MOCK_DATA.json");
+        MyJsonReader.JsonReader parser = new MyJsonReader().new JsonReader(json);
+        List<Object> parsedList = parser.parseArray();
 
-    public List<Product> getProductsFromJSON() throws IOException {
+        for (Object obj : parsedList) {
+
+            if (obj instanceof Map) {
+                Product product = null;
+                Map<String, Object> map = (Map<String, Object>) obj;
+                String Name = String.valueOf(map.get("Name"));
+                String Category = (String) map.get("Category");
+                int Price = ((Number) map.get("Price")).intValue();
+                products.add(new Product(Price, Name, Category));
+            }
+        }
+        return products;
+    }
+```
+czym się różni od 
+```
+public List<Product> getProductsFromJSON() throws IOException {
         // wczytanie JSON z resources
         String json = MyJsonReader.readFileAsStringFromResources("MOCK_DATA.json");
         List<Product> products = new ArrayList<>();
@@ -30,37 +51,8 @@ public class ProductService {
         }
         return products;
     }
+```
+i dlaczego pierwsza wersja nie dodanie do listy produktów
 
-    public List<Product> revertProducts(List<Product> products) {
-    // collect(Collectors.toList()) w połączeniu z Comparator.reverseOrder()
-        return products.reversed();
-    }
-
-    public void revertProductsV2(List<Product> products) {
-        // collect(Collectors.toList()) w połączeniu z Comparator.reverseOrder()
-        List<Product> reversed = products.reversed();
-
-        reversed.forEach(
-                System.out::println
-        );
-    }
-
-
-    public List<Product> addProductsFromJSON(List<Product> existingProducts) throws IOException {
-        // wczytanie JSON z resources
-        String json = MyJsonReader.readFileAsStringFromResources("MOCK_DATA2.json");
-        MyJsonReader.JsonReader parser = new MyJsonReader().new JsonReader(json);
-        List<Object> parsedList = parser.parseArray();
-
-        for (Object obj : parsedList) {
-            if (obj instanceof Map) {
-                Map<String, Object> map = (Map<String, Object>) obj;
-                String Name = String.valueOf(map.get("Name"));
-                String Category = (String) map.get("Category");
-                int Price = ((Number) map.get("Price")).intValue();
-                existingProducts.add(new Product(Name, Category, Price));
-            }
-        }
-        return existingProducts;
-    }
-}
+- Czym są wyjątki (checked i unchecked) w Java
+- Czym się różni podejście z użyciem ProductService i ProductService2
