@@ -20,6 +20,8 @@ import static utils.SummingService.sumDigit;
 
 // drukujesz wynik
 
+
+
 public class Lesson2 {
     /*
      dla wszystkich liczb <2, 1000>
