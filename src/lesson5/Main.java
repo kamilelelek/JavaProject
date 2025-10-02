@@ -34,29 +34,18 @@ public class Main {
 
     }
 
-   public static void getMostValuable() throws IOException {
-       ProductService productService = new ProductService();
-       List<Product> productsFromJSON = productService.getProductsFromJSON();
-       int mostValuable = productsFromJSON.stream().mapToInt(Product::getPrice).max().orElseThrow();
-       System.out.println(mostValuable);
+    public static void getMostValuable() throws IOException {
+        ProductService productService = new ProductService();
+        List<Product> productsFromJSON = productService.getProductsFromJSON();
+        int mostValuable = productsFromJSON.stream().mapToInt(Product::getPrice).max().orElseThrow();
+        System.out.println(mostValuable);
     }
 
     public static void returnDifferentProducts() throws IOException {
         ProductService productService = new ProductService();
         List<Product> productsFromJSON = productService.getProductsFromJSON();
-        List<HashSet> differentProducts = new ArrayList<>();
+        Set<String> differentProducts= new HashSet<>();
+
 
     }
-
-//    public static void main(String[] args) throws IOException {
-//
-//        ProductService2 productService2 = new ProductService2();
-//        List<Product> productsFromJSON = productService2.getProductsFromJSON();
-//
-//        productsFromJSON.forEach(
-//                System.out::println
-//        );
-//
-//    }
-
 }
