@@ -1,6 +1,8 @@
+package Lessons;
+
 import javax.swing.*;
 
-public class test {
+public class Test {
 
         public static void main(String[] args) {
             // Utwórz nowe okno (JFrame)

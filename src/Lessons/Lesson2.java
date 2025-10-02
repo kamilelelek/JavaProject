@@ -1,3 +1,5 @@
+package Lessons;
+
 import utils.CountingDivisorService;
 
 import java.util.ArrayList;

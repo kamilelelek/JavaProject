@@ -1,7 +1,7 @@
 package lesson5;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     //Produkt (nazwa, kategoria, cena)
@@ -30,6 +30,21 @@ public class Main {
         System.out.println("----------------------------------------------");
 
         productService.revertProductsV2(productsFromJSON);
+        getMostValuable();
+
+    }
+
+   public static void getMostValuable() throws IOException {
+       ProductService productService = new ProductService();
+       List<Product> productsFromJSON = productService.getProductsFromJSON();
+       int mostValuable = productsFromJSON.stream().mapToInt(Product::getPrice).max().orElseThrow();
+       System.out.println(mostValuable);
+    }
+
+    public static void returnDifferentProducts() throws IOException {
+        ProductService productService = new ProductService();
+        List<Product> productsFromJSON = productService.getProductsFromJSON();
+        List<HashSet> differentProducts = new ArrayList<>();
 
     }
 

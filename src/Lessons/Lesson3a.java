@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package Lessons;
 
 import static utils.CountingDivisorService.countingDivisor;
 import static utils.CountingDivisorService.isPrime;

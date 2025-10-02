@@ -1,4 +1,6 @@
-public class Zadanie1 {
+package homework;
+
+public class Homework1 {
     /*
     Wypisz liczbe z przedzialu <1, 1000> ktora ma najwiecej dzielnikow
      */
