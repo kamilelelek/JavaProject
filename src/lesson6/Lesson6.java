@@ -1,8 +1,8 @@
 package lesson6;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.nio.file.Files;
+import java.util.*;
 
 public class Lesson6 {
 
@@ -11,30 +11,48 @@ public class Lesson6 {
         posortuj pliki od najwczesniej stworzonego do najpozniej stworzonego
      */
     public static void main(String[] args) {
-        File directory = new File( "C:\\Users\\ja\\REPO\\JavaProject");
-
-        getBiggestFile(directory);
-
-        //getBiggestFile();
-        //System.out.println(files);
+        File directory = new File("C:\\Users\\ja\\REPO\\JavaProject");
+        List<File> javaFiles = new ArrayList<>();
+        getBiggestFile(directory, javaFiles);
+        sortFilesByDate(javaFiles, directory);
     }
 
-    public static void getBiggestFile(File directory) {
-        File[] files = directory.listFiles();
-        long fileZero=0;
-        for (File file : files){
-            System.out.println("Plik: " + file.getName() + " , has length: " + file.length());
-            if (file.length()>fileZero){
-                fileZero=file.length();
-            }
-            //Arrays.stream(files).max(Comparator.comparingInt()).orElseThrow();
-            //System.out.println("Plik: " + file.getName() + " , has usable space: " + file.getUsableSpace());
-            //System.out.println(files[i]);
-            //System.out.println(files[i].length());
+    public static void getBiggestFile(File directory, List<File> javaFiles) {
+        File[] files = directory.listFiles((dir, name) -> name.endsWith(".java"));
+        findJavaFiles(directory, javaFiles);
+        if (javaFiles.isEmpty()) {
+            System.out.println("Nie znaleziono żadnych plików .java w folderze " + directory.getAbsolutePath());
+            return;
         }
-        System.out.println("The biggest file is equals: " +fileZero);
 
+       /* for (File file : javaFiles) {
+            System.out.println("Plik: " + file.getAbsolutePath() + " , ma długość: " + file.length() + " bajtów");
+        }*/
+        //Optional<File> fileZero= Optional.of(javaFiles.stream().max(Comparator.comparingLong(File::length)).orElseThrow());
+        File biggest = javaFiles.stream()
+                .max(Comparator.comparingLong(File::length))
+                .orElseThrow();
+        System.out.println("Największy plik: " + biggest.getName() + " (" + biggest.length() + " bajtów)");
     }
- //   File
-   // File[] files
+
+    private static void findJavaFiles(File directory, List<File> javaFiles) {
+        File[] files = directory.listFiles();
+        if (files == null) return;
+
+        for (File file : files) {
+            if (file.isDirectory()) {
+                findJavaFiles(file, javaFiles); // rekurencja – przeszukaj podfolder
+            } else if (file.getName().endsWith(".java")) {
+                javaFiles.add(file);
+            }
+        }
+    }
+
+    private static void sortFilesByDate(List<File> javaFiles, File directory) {
+        findJavaFiles(directory, javaFiles);
+        javaFiles.sort(Comparator.comparing(File::lastModified));
+        javaFiles.toArray();
+        String lastModified = String.valueOf(javaFiles.getFirst());
+        System.out.println(lastModified);
+    }
 }
